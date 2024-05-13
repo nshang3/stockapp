@@ -1,4 +1,4 @@
-export var Stock = {
+export var Lot = {
 
     date: " ", 
     shares: 0,
