@@ -5,9 +5,9 @@ function App() {
   return (  
   <>
     <div className="Nav">
-      <div className="Inner">
-        <div className="Outer">
-
+      <div className="Outer">
+        <div className="Inner">
+            <h1 className="Title">STOCK KEEPER</h1>
         </div>
       </div>
     </div>
