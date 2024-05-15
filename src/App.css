@@ -1,0 +1,10 @@
+
+.Nav{
+    
+    width: 100%;
+    height: 20%;
+    flex-shrink: 0;
+    background: #90EED8;
+    box-shadow: 8px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
