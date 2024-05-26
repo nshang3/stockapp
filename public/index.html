@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +33,20 @@
     #root {
       height: 100%
     } 
-  </style>  
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Inter', sans-serif;
+    }
+
+  </style>
+  <!--
+    This style ensures the root element's height is 100% of the body element. 
+    However, the body element's height is not intially set to be 100% of the viewport height (the screen).
+    We ensure this with giving html and body selectors height 100%.
+  -->  
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
