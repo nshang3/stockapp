@@ -18,7 +18,8 @@ function App() {
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
       <button className="quoteBtn">Add Quote</button>
-        
+      <button className="bankBtn">Sort By Bank</button>
+      <button className="sortBtn">Sort A-Z</button>
       </section>
 
     <div className="line">
