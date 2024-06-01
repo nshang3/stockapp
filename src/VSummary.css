@@ -1,0 +1,19 @@
+.totalValue{
+    color: #2F5D42;
+    font-family: Inter;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-left: 2%
+}
+
+.gain{
+    color: #4D90C0;
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-left: 2%
+}

@@ -1,3 +1,6 @@
+import './VQuote.css';
+//import { useEffect } from 'react';
+
 const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=GOOG%2CIBM%2CAAPL';
 
 const options = {
@@ -8,23 +11,31 @@ const options = {
 	}
 };
 
-export default async function ViewQuote(){
-    try {
-        fetch(url, options)
-        .then(function(resp){
-            return resp.json();
-        })
-        .then(function(quotes){
+  function VQuote(){
+    // try {
+    //     fetch(url, options)
+    //     .then(function(resp){
+    //         return resp.json();
+    //     })
+    //     .then(function(quotes){
             
-            console.log(quotes)
+    //         console.log(quotes)
 
-        })
-    } catch (error) {
-        console.error(error);
-    }
+    //     })
+    // } catch (error) {
+    //     console.error(error);
+    // }
+
+    return (
+        <>
+        <section className="Quote">
+
+        </section>
+        </>
+    )
 }
-
-ViewQuote()
+export default VQuote;
+// ViewQuote()
 
 
 
