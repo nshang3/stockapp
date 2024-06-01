@@ -2,7 +2,9 @@
 import './App.css';
 import './VSummary.css'
 import VQuote from './VQuote.js';
-//import { useState } from 'react';
+import AddQuote from './AddQuote.js';
+
+import { useState } from 'react';
 
 function VSummary(){
   return (
@@ -16,7 +18,14 @@ function VSummary(){
   )
 }
 function App() {
-  //const [vquote, setVQuote] = useState(null) 
+  const [isQuote, setIsQuote] = useState(false) 
+
+  const openAddQ = () =>{
+    setIsQuote(true)
+  }
+  const closeAddQ = () =>{
+    setIsQuote(false)
+  }
 
   return (  
   <>
@@ -33,7 +42,9 @@ function App() {
     <section className="DashBoard">
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
-      <button className="quoteBtn">Add Quote</button>
+      <button className="quoteBtn" onClick={openAddQ}> Add Quote</button>
+      {isQuote && <AddQuote onClose={closeAddQ}/>}
+
       <button className="bankBtn">Sort By Bank</button>
       <button className="sortBtn">Sort A-Z</button>
       </section>
