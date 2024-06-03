@@ -11,7 +11,7 @@ const options = {
 	}
 };
 
-  function VQuote(){
+  function VQuote({text}){
     // try {
     //     fetch(url, options)
     //     .then(function(resp){
@@ -29,7 +29,7 @@ const options = {
     return (
         <>
         <section className="Quote">
-
+        <p>{text}</p>
         </section>
         </>
     )

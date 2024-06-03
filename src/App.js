@@ -19,12 +19,18 @@ function VSummary(){
 }
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
+  const [VQuotes, setVQuote] = useState([]) 
+  
 
   const openAddQ = () =>{
     setIsQuote(true)
   }
   const closeAddQ = () =>{
     setIsQuote(false)
+  }
+
+  function genVQuote(){
+    setVQuote([...VQuotes, "stock"])
   }
 
   return (  
@@ -43,24 +49,20 @@ function App() {
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
       <button className="quoteBtn" onClick={openAddQ}> Add Quote</button>
-      {isQuote && <AddQuote onClose={closeAddQ}/>}
+      {isQuote && <AddQuote onClose={closeAddQ} createVQuote={genVQuote}/>}
 
       <button className="bankBtn">Sort By Bank</button>
       <button className="sortBtn">Sort A-Z</button>
-      </section>
+    </section>
 
     <div className="line">
     </div>
 
     <VSummary />
-    <VQuote />
-    <VQuote />
-    <VQuote />
-    <VQuote />
-    <VQuote />
-    <VQuote />
-    <VQuote />
     
+    {VQuotes.map(quote => <VQuote text={quote} /> )}
+    
+
     <footer className="Footer"></footer>
   </>
   );
