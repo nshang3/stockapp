@@ -11,7 +11,7 @@ const options = {
 	}
 };
 
-  function VQuote({text}){
+  function VQuote({qKey}){
     // try {
     //     fetch(url, options)
     //     .then(function(resp){
@@ -28,8 +28,13 @@ const options = {
 
     return (
         <>
-        <section className="Quote">
-        <p>{text}</p>
+        <section key={qKey} className="Quote">
+        <button className="DropDown">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
+            <path d="M11.1156 15.1648L0.650006 0.262842L21.2344 0.0252577L11.1156 15.1648Z" fill="#1B4920"/>
+          </svg>
+        </button>
+        <div className="Col"> GOOGL </div>
         </section>
         </>
     )

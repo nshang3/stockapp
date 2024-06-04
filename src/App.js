@@ -4,7 +4,7 @@ import './VSummary.css'
 import VQuote from './VQuote.js';
 import AddQuote from './AddQuote.js';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 function VSummary(){
   return (
@@ -17,10 +17,13 @@ function VSummary(){
     </>
   )
 }
+
+//var id = 0
+
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuote] = useState([]) 
-  
+  const id = useRef(0)
 
   const openAddQ = () =>{
     setIsQuote(true)
@@ -30,7 +33,7 @@ function App() {
   }
 
   function genVQuote(){
-    setVQuote([...VQuotes, "stock"])
+    setVQuote([...VQuotes, id.current++])
   }
 
   return (  
@@ -60,7 +63,7 @@ function App() {
 
     <VSummary />
     
-    {VQuotes.map(quote => <VQuote text={quote} /> )}
+    {VQuotes.map(id => <VQuote key={id} /> )}
     
 
     <footer className="Footer"></footer>
