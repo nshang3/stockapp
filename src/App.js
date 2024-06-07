@@ -19,7 +19,24 @@ function VSummary(){
 }
 
 //var id = 0
-
+function ColumnHead(){
+  return (
+    <>
+    <div className="quoteHeader">
+      <div className="quoteCols">Symbol</div>
+      <div className="quoteCols">Shares</div>
+      <div className="quoteCols">Last Price</div>
+      <div className="quoteCols">Market Value</div>
+      <div className="quoteCols">Avg Cost</div>
+      <div className="quoteCols">Total Cost</div>
+      <div className="quoteCols">Dividend</div>
+      <div className="quoteCols">Daily Gain</div>
+      <div className="quoteCols">Total Gain</div>
+      <div className="quoteCols">Total Return</div>
+    </div>
+    </>
+  )
+}
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuote] = useState([]) 
@@ -62,9 +79,11 @@ function App() {
     </div>
 
     <VSummary />
-    
+
+    <div className='qCont'>
+    <ColumnHead />
     {VQuotes.map(id => <VQuote key={id} /> )}
-    
+    </div>
 
     <footer className="Footer"></footer>
   </>

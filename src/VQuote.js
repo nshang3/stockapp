@@ -34,7 +34,25 @@ const options = {
             <path d="M11.1156 15.1648L0.650006 0.262842L21.2344 0.0252577L11.1156 15.1648Z" fill="#1B4920"/>
           </svg>
         </button>
-        <div className="Col"> GOOGL </div>
+          <div className="Vcol">GOOGL</div>
+          <div className="Vcol">321</div>
+          <div className="Vcol">170.90</div>
+          <div className="Vcol">512.7</div>
+          <div className="Vcol">94.60</div>
+          <div className="Vcol">218.18</div>
+          <div className="Vcol">500</div>
+          <div className="Vcol">
+            <p>+0.61</p>
+            <p>+0.36%</p>
+          </div>
+          <div className="Vcol">
+            <p>+13,761.52</p>
+            <p>+81.77%</p>
+          </div>
+          <div className="Vcol">
+            <p>+666,963.74</p>
+            <p>+41.36%</p>
+          </div>
         </section>
         </>
     )

@@ -129,6 +129,24 @@ section.DashBoard {
     color: white;
 }
 
+.quoteHeader{
+    margin-left: 4%;
+    font-family: Inter;
+    display: flex;
+}
+
+.quoteCols{
+    margin-bottom: 1%;
+    margin-right: 4.4%;
+}
+
+.qCont{
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter';
+}
+
 .Footer{
     background: #86CF80;
     width: 100%;
