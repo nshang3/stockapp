@@ -1,7 +1,7 @@
 import './VQuote.css';
-//import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=GOOG%2CIBM%2CAAPL';
+const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=IBM';
 
 const options = {
 	method: 'GET',
@@ -12,19 +12,29 @@ const options = {
 };
 
   function VQuote({qKey}){
-    // try {
-    //     fetch(url, options)
-    //     .then(function(resp){
-    //         return resp.json();
-    //     })
-    //     .then(function(quotes){
-            
-    //         console.log(quotes)
+    const [dojoURL, setDojoURL] = useState(url)
+    const [sym, setSym] = useState("")
+    const [regPrice, setRegPrice] = useState(0)
 
-    //     })
-    // } catch (error) {
-    //     console.error(error);
-    // }
+
+    const fetchQuotes = () => {
+      fetch(dojoURL, options)
+      .then(function(resp){
+        return resp.json();
+      })
+      .then(function(quotes){
+        
+        console.log(quotes)
+        console.log(quotes.quoteResponse.result[0].symbol)
+        setSym(quotes.quoteResponse.result[0].symbol)
+        setRegPrice(quotes.quoteResponse.result[0].regularMarketPrice)
+      })
+    }
+
+    useEffect( () =>{
+      fetchQuotes()
+    }, [dojoURL, qKey])
+
 
     return (
         <>
@@ -34,9 +44,9 @@ const options = {
             <path d="M11.1156 15.1648L0.650006 0.262842L21.2344 0.0252577L11.1156 15.1648Z" fill="#1B4920"/>
           </svg>
         </button>
-          <div className="Vcol">GOOGL</div>
+          <div className="Vcol">{sym}</div>
           <div className="Vcol">321</div>
-          <div className="Vcol">170.90</div>
+          <div className="Vcol">{regPrice}</div>
           <div className="Vcol">512.7</div>
           <div className="Vcol">94.60</div>
           <div className="Vcol">218.18</div>
