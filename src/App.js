@@ -18,7 +18,6 @@ function VSummary(){
   )
 }
 
-//var id = 0
 function ColumnHead(){
   return (
     <>
@@ -41,6 +40,9 @@ function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuote] = useState([]) 
   const id = useRef(0)
+
+  const [symbo, setSymbo] = useState("-")
+  const [regPri, setRegPri] = useState(0)
 
   const openAddQ = () =>{
     setIsQuote(true)
@@ -69,7 +71,7 @@ function App() {
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
       <button className="quoteBtn" onClick={openAddQ}> Add Quote</button>
-      {isQuote && <AddQuote onClose={closeAddQ} createVQuote={genVQuote}/>}
+      {isQuote && <AddQuote onClose={closeAddQ} createVQuote={genVQuote} setSym={setSymbo} setMarkPric={setRegPri}/>}
 
       <button className="bankBtn">Sort By Bank</button>
       <button className="sortBtn">Sort A-Z</button>
@@ -82,7 +84,7 @@ function App() {
 
     <div className='qCont'>
     <ColumnHead />
-    {VQuotes.map(id => <VQuote key={id} /> )}
+    {VQuotes.map(id => <VQuote key={id} sym= {symbo} regPrice= {regPri} /> )}
     </div>
 
     <footer className="Footer"></footer>

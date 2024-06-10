@@ -1,40 +1,39 @@
 import './VQuote.css';
 import { useEffect, useRef, useState } from 'react';
 
-const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=IBM';
+// const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=IBM';
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
-		'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
+// 		'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+// 	}
+// };
 
-  function VQuote({qKey}){
-    const [dojoURL, setDojoURL] = useState(url)
-    const [sym, setSym] = useState("")
-    const [regPrice, setRegPrice] = useState(0)
+  function VQuote({qKey, sym, regPrice }){
+    // const [dojoURL, setDojoURL] = useState(url)
+    // const [sym, setSym] = useState("")
+    // const [regPrice, setRegPrice] = useState(0)
 
 
-    const fetchQuotes = () => {
-      fetch(dojoURL, options)
-      .then(function(resp){
-        return resp.json();
-      })
-      .then(function(quotes){
+    // const fetchQuotes = () => {
+    //   fetch(dojoURL, options)
+    //   .then(function(resp){
+    //     return resp.json();
+    //   })
+    //   .then(function(quotes){
         
-        console.log(quotes)
-        console.log(quotes.quoteResponse.result[0].symbol)
-        setSym(quotes.quoteResponse.result[0].symbol)
-        setRegPrice(quotes.quoteResponse.result[0].regularMarketPrice)
-      })
-    }
+    //     console.log(quotes)
+    //     console.log(quotes.quoteResponse.result[0].symbol)
+    //     setSym(quotes.quoteResponse.result[0].symbol)
+    //     setRegPrice(quotes.quoteResponse.result[0].regularMarketPrice)
+    //   })
+    // }
 
-    useEffect( () =>{
-      fetchQuotes()
-    }, [dojoURL, qKey])
-
+    // useEffect( () =>{
+    //   fetchQuotes()
+    // }, [qKey])
 
     return (
         <>
