@@ -1,49 +1,60 @@
 import './AddQuote.css';
-import VQuote from './VQuote.js';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
-function AddQuote({onClose, createVQuote, setSym, setMarkPric}){
-  const [srchSymbol, setSrchSymbol] = useState('LMT')
-  var searchSymbol = 'LMT';
-  const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=' + srchSymbol;
+function AddQuote({onClose, createVQuote}){
+  const [save, setSave] = useState(false)
 
-  
-  const options = useMemo(() => ({
+  const options = {
     method: 'GET',
     headers: {
     'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
     'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
     }
-  })
-  )
-
+  }
   
-  const [dojoURL, setDojoURL] = useState(url)
+  const [dojoURL, setDojoURL] = useState(null)
   const inputRef = useRef()
 
 
   const fetchQuotes = () => {
+    
       fetch(dojoURL, options)
       .then(function(resp){
         return resp.json();
       })
       .then(function(quotes){
-        
+
         console.log(quotes)
-        setSym(quotes.quoteResponse.result[0].symbol)
-        setMarkPric(quotes.quoteResponse.result[0].regularMarketPrice)
+        createVQuote(quotes.quoteResponse.result[0].symbol, quotes.quoteResponse.result[0].regularMarketPrice )
+        //pass quotes.quoteResponse.result[0].symbol as arguemnt to createVQuote that has parameters??
+        //quotes.quoteResponse.result[0].regularMarketPrice
       })
   }
 
   useEffect( () =>{
+
+    if (dojoURL != null){
+
     fetchQuotes()
-  }, [])//a depdency for re render
+    console.log(dojoURL + " dojoURL in useEffect()")
+    if (save){
+      onClose()
+
+    }
+
+  }
+    
+  }, [dojoURL])
 
   function handleClick(){
-    setSrchSymbol(inputRef.current.value)
-    console.log(inputRef.current.value)
+
+    setSave(true)
+    setDojoURL(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=`+ inputRef.current.value)
+
   }
+
+
     return (
 
     <div className="popup-container">
@@ -53,7 +64,7 @@ function AddQuote({onClose, createVQuote, setSym, setMarkPric}){
             <input type="text" id="searchSym" ref={inputRef}  placeholder='Search symbol'/>
         </form>
         <button onClick={onClose} className="btn"> Cancel </button>
-        <button onClick={() => {createVQuote(); onClose(); handleClick();}} className="btn"> Save </button>
+        <button onClick={() => {handleClick();}} className="btn"> Save </button>
 
       </div>
     </div>

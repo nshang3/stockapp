@@ -36,13 +36,11 @@ function ColumnHead(){
     </>
   )
 }
+
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuote] = useState([]) 
   const id = useRef(0)
-
-  const [symbo, setSymbo] = useState("-")
-  const [regPri, setRegPri] = useState(0)
 
   const openAddQ = () =>{
     setIsQuote(true)
@@ -51,8 +49,8 @@ function App() {
     setIsQuote(false)
   }
 
-  function genVQuote(){
-    setVQuote([...VQuotes, id.current++])
+  function genVQuote(symbol='-', regPrice='0'){
+    setVQuote([...VQuotes, { key: id.current++, symbol, regPrice}])
   }
 
   return (  
@@ -71,7 +69,7 @@ function App() {
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
       <button className="quoteBtn" onClick={openAddQ}> Add Quote</button>
-      {isQuote && <AddQuote onClose={closeAddQ} createVQuote={genVQuote} setSym={setSymbo} setMarkPric={setRegPri}/>}
+      {isQuote && <AddQuote onClose={closeAddQ} createVQuote={genVQuote} />}
 
       <button className="bankBtn">Sort By Bank</button>
       <button className="sortBtn">Sort A-Z</button>
@@ -84,15 +82,14 @@ function App() {
 
     <div className='qCont'>
     <ColumnHead />
-    {VQuotes.map(id => <VQuote key={id} sym= {symbo} regPrice= {regPri} /> )}
+    {VQuotes.map(quote => <VQuote key={quote.key} sym= {quote.symbol} regPrice= {quote.regPrice} /> )}
     </div>
 
     <footer className="Footer"></footer>
   </>
   );
 }
-//create small form component for add quote, then add quote will have useState() for user input to change up the keywords for the API
+
 //VQuote will be imported, do you still need a controller if using hooks?
-//to display after pressing add quote probably useState for the actual interaction and then a  useEffect
 //create total info component after adding all the quotes, which state would this be? I think useState
 export default App;
