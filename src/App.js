@@ -43,6 +43,7 @@ function App() {
   const id = useRef(0)
 
   const openAddQ = () =>{
+    
     setIsQuote(true)
   }
   const closeAddQ = () =>{

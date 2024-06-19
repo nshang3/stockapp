@@ -141,7 +141,7 @@ section.DashBoard {
 }
 
 .qCont{
-    margin-left: 4%;
+    margin-left: 2%;
     display: flex;
     flex-direction: column;
     font-family: 'Inter';

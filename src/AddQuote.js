@@ -1,18 +1,18 @@
 import './AddQuote.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 
 function AddQuote({onClose, createVQuote}){
   const [save, setSave] = useState(false)
 
-  const options = {
+  const options = useMemo(() => ({
     method: 'GET',
     headers: {
     'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
     'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
     }
-  }
-  
+  }), [])
+
   const [dojoURL, setDojoURL] = useState(null)
   const inputRef = useRef()
 
@@ -37,7 +37,6 @@ function AddQuote({onClose, createVQuote}){
     if (dojoURL != null){
 
     fetchQuotes()
-    console.log(dojoURL + " dojoURL in useEffect()")
     if (save){
       onClose()
 

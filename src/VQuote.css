@@ -10,6 +10,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 10px
 }
 .DropDown{
     width: 23.77px;
@@ -21,7 +22,7 @@
     cursor: pointer;
     border: none;
     margin-top: 0.5%;
-    margin-left: 2%;
+    margin-right: 1%;
 }
 
 .Vcontainer{
@@ -37,5 +38,6 @@
 
 .Vcol{
     margin-right: 4.3%;
-    margin-left: 2%;
+    flex: 1;
+    text-align: center;
 }
