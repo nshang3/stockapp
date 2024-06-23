@@ -4,7 +4,7 @@ import './VSummary.css'
 import VQuote from './VQuote.js';
 import AddQuote from './AddQuote.js';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 function VSummary(){
   return (
@@ -39,11 +39,13 @@ function ColumnHead(){
 
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
+  const [isVClose, setIsVClose] = useState(false)
   const [VQuotes, setVQuote] = useState([]) 
+  
   const id = useRef(0)
 
   const openAddQ = () =>{
-    
+
     setIsQuote(true)
   }
   const closeAddQ = () =>{
@@ -51,9 +53,16 @@ function App() {
   }
 
   function genVQuote(symbol='-', regPrice='0'){
-    setVQuote([...VQuotes, { key: id.current++, symbol, regPrice}])
+    setVQuote([...VQuotes, { key: id.current++, symbol, regPrice, isVClose}])
   }
 
+  function closeVQuote(selKey){
+  
+  setVQuote(VQuotes.filter(quote => quote.key !== selKey ))
+
+ }
+
+    
   return (  
   <>
     <section className="Nav">
@@ -63,9 +72,9 @@ function App() {
         </div>
       </div>
     </section>
+
     <div className="line">
     </div>
-
     <section className="DashBoard">
       <h2 className="holdingsBox">MY HOLDINGS</h2>
       
@@ -75,7 +84,6 @@ function App() {
       <button className="bankBtn">Sort By Bank</button>
       <button className="sortBtn">Sort A-Z</button>
     </section>
-
     <div className="line">
     </div>
 
@@ -83,7 +91,7 @@ function App() {
 
     <div className='qCont'>
     <ColumnHead />
-    {VQuotes.map(quote => <VQuote key={quote.key} sym= {quote.symbol} regPrice= {quote.regPrice} /> )}
+    {VQuotes.map(quote => <VQuote key={quote.key} qKey={quote.key} sym= {quote.symbol} regPrice= {quote.regPrice} close={closeVQuote} /> )}
     </div>
 
     <footer className="Footer"></footer>
