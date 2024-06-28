@@ -1,48 +1,65 @@
 import './VQuote.css';
 import { useEffect, useRef, useState } from 'react';
+import AddLot from './AddLot.js';
 
-// const url = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=IBM';
+  function LotView(){
 
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
-// 		'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-// 	}
-// };
-
-  function VQuote({qKey, sym, regPrice }){
-    // const [dojoURL, setDojoURL] = useState(url)
-    // const [sym, setSym] = useState("")
-    // const [regPrice, setRegPrice] = useState(0)
-
-
-    // const fetchQuotes = () => {
-    //   fetch(dojoURL, options)
-    //   .then(function(resp){
-    //     return resp.json();
-    //   })
-    //   .then(function(quotes){
-        
-    //     console.log(quotes)
-    //     console.log(quotes.quoteResponse.result[0].symbol)
-    //     setSym(quotes.quoteResponse.result[0].symbol)
-    //     setRegPrice(quotes.quoteResponse.result[0].regularMarketPrice)
-    //   })
-    // }
-
-    // useEffect( () =>{
-    //   fetchQuotes()
-    // }, [qKey])
-
-    return (
-        <>
-        <section key={qKey} className="Quote">
-        <button className="DropDown">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-            <path d="M11.1156 15.1648L0.650006 0.262842L21.2344 0.0252577L11.1156 15.1648Z" fill="#1B4920"/>
-          </svg>
+    return(
+      <div className="Quote" id="lot">
+        <button className="addTransBtn"> 
+          Add Transaction
         </button>
+      
+      <div className="lotCont">
+        <AddLot />
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+      </div>
+
+      </div>
+    )
+  }
+  function VQuote({qKey, sym, regPrice, close }){
+
+    const [isVLot, setIsVLot] = useState(false)
+    const [rotated, setRotated] = useState(false);
+
+
+    const toggleVLot = () => {
+      if (isVLot == false){
+        setIsVLot(true)
+      }
+      else{
+        setIsVLot(false)
+      }
+    }
+
+    const toggleRotation = () => {
+
+      if (rotated == false){
+      setRotated(true);
+      }
+      else {
+        setRotated(false)
+      }
+
+    };
+
+    function handleDelete() {
+      console.log(qKey)
+      close(qKey)
+    }
+    return (
+      <>
+      <div className="subCont">
+        <section key={qKey} className="Quote">
+          <button onClick={ () => {toggleVLot(); toggleRotation()}} className={`DropDown ${rotated ? 'Rotated' : ''}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
+              <path d="M11.1156 15.1648L0.650006 0.262842L21.2344 0.0252577L11.1156 15.1648Z" fill="#1B4920"/>
+            </svg>
+          </button>
           <div className="Vcol">{sym}</div>
           <div className="Vcol">321</div>
           <div className="Vcol">{regPrice}</div>
@@ -70,11 +87,12 @@ import { useEffect, useRef, useState } from 'react';
           </svg>
           </button>
         </section>
-        </>
+        {isVLot && <LotView />}
+      </div>
+      </>
     )
 }
 export default VQuote;
-// ViewQuote()
 
 
 
