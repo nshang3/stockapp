@@ -4,7 +4,7 @@ import './VSummary.css'
 import VQuote from './VQuote.js';
 import AddQuote from './AddQuote.js';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 function VSummary(){
   return (
@@ -39,7 +39,6 @@ function ColumnHead(){
 
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
-  const [isVClose, setIsVClose] = useState(false)
   const [VQuotes, setVQuote] = useState([]) 
   
   const id = useRef(0)
@@ -53,7 +52,7 @@ function App() {
   }
 
   function genVQuote(symbol='-', regPrice='0'){
-    setVQuote([...VQuotes, { key: id.current++, symbol, regPrice, isVClose}])
+    setVQuote([...VQuotes, { key: id.current++, symbol, regPrice}])
   }
 
   function closeVQuote(selKey){
