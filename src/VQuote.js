@@ -1,26 +1,59 @@
 import './VQuote.css';
 import { useEffect, useRef, useState } from 'react';
 import AddLot from './AddLot.js';
+import VLot from './VLot.js';
 
-  function LotView(){
+  function Header(){
 
+    return (
+      <>
+      <div className="lotCol" id="headCol">Transaction</div>
+      <div className="lotCol" id="headCol">Date</div>
+      <div className="lotCol" id="headCol">Shares</div>
+      <div className="lotCol" id="headCol">Cost/Share</div>
+      <div className="lotCol" id="headCol">Commission</div>
+      <div className="lotCol" id="headCol">Total</div>
+      <div className="lotCol" id="headCol">Total Gain</div>
+      <div className="lotCol" id="headCol">Bank</div>
+      <div className="lotCol" id="headCol">Notes</div>
+      </>
+    )
+  }
+
+  function LotsView(){
+    const [addT, setAddT] = useState(false)
+
+      function closeT(){
+        setAddT(false)
+      }
+
+      function openT(){
+        setAddT(true)
+      }
+    
     return(
       <div className="Quote" id="lot">
-        <button className="addTransBtn"> 
+
+        <button className="addTransBtn" onClick={() => {openT()}}> 
           Add Transaction
         </button>
       
-      <div className="lotCont">
-        <AddLot />
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
-      </div>
+        <div className="lotCont">
+          {addT && <AddLot close={closeT} />}
+
+          <div className="lot" id="lotHeader">
+            <Header />
+          </div>
+
+          <VLot />
+          <VLot />
+          <VLot />
+        </div>
 
       </div>
     )
   }
+
   function VQuote({qKey, sym, regPrice, close }){
 
     const [isVLot, setIsVLot] = useState(false)
@@ -87,7 +120,7 @@ import AddLot from './AddLot.js';
           </svg>
           </button>
         </section>
-        {isVLot && <LotView />}
+        {isVLot && <LotsView />}
       </div>
       </>
     )

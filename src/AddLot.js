@@ -1,6 +1,6 @@
 import './AddLot.css'
 
-function AddLot(){
+function AddLot( {close} ){
 
     return (
             <div className="addCont">
@@ -41,7 +41,7 @@ function AddLot(){
 
             <div className="btnCont">
             <button className="abtn">Save</button>
-            <button className="abtn">Cancel</button>
+            <button className="abtn" onClick={() => {close()}}>Cancel</button>
             </div>
 
             </div>       
