@@ -12,7 +12,16 @@
     padding: 10px
 }
 
+#lotHeader{
+    background: #6FEA99;
+    justify-content: left;
+    margin-left: 3%
+}
 
+#headCol{
+    margin-right: 5.5%;
+    margin-bottom: 0
+}
 
 #lot{
     background: #6FEA99;

@@ -1,0 +1,23 @@
+.lot{
+    background: #6bcf81;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-right: 2%;
+    justify-content: center;
+}
+
+.lotCol{
+    font-size: 0.8em;
+    margin-right: 6%;
+    margin-bottom: 1%;
+}
+
+#lotBtn{
+    background: #6bcf81;
+    border: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
