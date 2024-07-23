@@ -2,7 +2,14 @@ import './AddQuote.css';
 import { useState, useEffect, useRef, useMemo } from 'react';
 
 
-function AddQuote({onClose, createVQuote}){
+function AddQuote({onClose}){
+
+  const [quote, setQuote] = useState({
+    symbol: "",
+    lastPrice: 0.0,
+
+  })
+
   const [save, setSave] = useState(false)
 
   const options = useMemo(() => ({
@@ -17,40 +24,75 @@ function AddQuote({onClose, createVQuote}){
   const inputRef = useRef()
 
 
-  const fetchQuotes = () => {
-    
-      fetch(dojoURL, options)
-      .then(function(resp){
-        return resp.json();
-      })
-      .then(function(quotes){
+  const fetchQuotes = async () => {
+    try {
+      const response = await fetch(dojoURL, options)
+      const quotes = await response.json()
+      //console.log(quotes.quoteResponse.result[0].regularMarketPrice)
 
-        console.log(quotes)
-        createVQuote(quotes.quoteResponse.result[0].symbol, quotes.quoteResponse.result[0].regularMarketPrice )
-        //pass quotes.quoteResponse.result[0].symbol as arguemnt to createVQuote that has parameters??
-        //quotes.quoteResponse.result[0].regularMarketPrice
-      })
+      setQuote(prev => ({
+        ...prev,
+        symbol: quotes.quoteResponse.result[0].symbol, 
+        lastPrice: quotes.quoteResponse.result[0].regularMarketPrice,
+      }));
+      
+
+    }  
+      catch (error) {
+        console.error(error)
+      }
   }
+
+  const post = async () => {
+    
+    const quo = {...quote}
+    
+    //console.log(quo.symbol)
+    //console.log(quo.lastPrice)
+
+    try{
+      let response;
+
+      response = await fetch("http://localhost:5050/quotes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(quo),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+    }
+    catch (error) { 
+      console.error('A problem occurred adding or updating a record: ', error);
+    }
+  }
+
+  useEffect( () =>{
+      
+      if (quote.symbol != "" ){
+      post()
+
+      if (save){
+        onClose()
+      }
+
+      }
+  }, [quote])
 
   useEffect( () =>{
 
     if (dojoURL != null){
-
-    fetchQuotes()
-    if (save){
-      onClose()
-
-    }
-
-  }
-    
+      fetchQuotes()
+    } 
   }, [dojoURL])
 
-  function handleClick(){
-
+  const handleClick = () =>{
     setSave(true)
     setDojoURL(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=`+ inputRef.current.value)
-
   }
 
 

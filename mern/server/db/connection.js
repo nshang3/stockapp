@@ -21,6 +21,6 @@ try {
   console.error(err);
 }
 
-let db = client.db("lots");
+let db = client.db("Stocks");//create a db named lots
 
 export default db;

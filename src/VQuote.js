@@ -58,7 +58,8 @@ import VLot from './VLot.js';
 
     const [isVLot, setIsVLot] = useState(false)
     const [rotated, setRotated] = useState(false);
-
+    console.log(sym)
+    console.log(regPrice)
 
     const toggleVLot = () => {
       if (isVLot == false){
