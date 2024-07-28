@@ -10,7 +10,6 @@ import { useState, useRef, useEffect } from 'react';
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuotes] = useState([]) 
-  
   const id = useRef(0)
 
   const openAddQ = () =>{
@@ -25,6 +24,7 @@ function App() {
   // }
 
   useEffect(() =>{
+    //console.log("I'm called in App ")
     async function getQuotes(){
       const response = await fetch(`http://localhost:5050/quotes/`)
       if (!response.ok) {
@@ -35,6 +35,7 @@ function App() {
 
       const vquos = await response.json()
       setVQuotes(vquos)
+      console.log(vquos)
     }
     getQuotes()
     return;

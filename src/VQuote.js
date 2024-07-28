@@ -58,8 +58,8 @@ import VLot from './VLot.js';
 
     const [isVLot, setIsVLot] = useState(false)
     const [rotated, setRotated] = useState(false);
-    console.log(sym)
-    console.log(regPrice)
+    //console.log(sym)
+    //console.log(regPrice)
 
     const toggleVLot = () => {
       if (isVLot == false){
@@ -81,8 +81,11 @@ import VLot from './VLot.js';
 
     };
 
-    function handleDelete() {
+    async function handleDelete() {
       console.log(qKey)
+      await fetch(`http://localhost:5050/quotes/${qKey}`, {
+        method: "DELETE",
+      })
       close(qKey)
     }
     return (
