@@ -46,9 +46,7 @@ function AddQuote({onClose}){
   const post = async () => {
     
     const quo = {...quote}
-    
-    //console.log(quo.symbol)
-    //console.log(quo.lastPrice)
+  
 
     try{
       let response;
