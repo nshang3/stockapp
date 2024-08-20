@@ -10,7 +10,6 @@ import { useState, useRef, useEffect } from 'react';
 function App() {
   const [isQuote, setIsQuote] = useState(false) 
   const [VQuotes, setVQuotes] = useState([]) 
-  const id = useRef(0)
 
   const openAddQ = () =>{
     setIsQuote(true)
@@ -23,28 +22,29 @@ function App() {
   //   setVQuote([...VQuotes, { key: id.current++, symbol, regPrice}])
   // }
 
+
+
   useEffect(() =>{
-    //console.log("I'm called in App ")
+    console.log("useEffect for fetching quotes called ")
     async function getQuotes(){
-      const response = await fetch(`http://localhost:5050/quotes/`)
+      await new Promise(resolve => setTimeout(resolve, 100));//THIS IS FUCKING STUPID
+      const response = await fetch(`http://localhost:5050/quotes/`, { cache: "no-store" })
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.log(message);
         return;
       }
-
+  
       const vquos = await response.json()
       setVQuotes(vquos)
       console.log(vquos)
     }
     getQuotes()
     return;
-  }, [VQuotes.length, isQuote])
+  }, [isQuote, VQuotes.length])
   
   function closeVQuote(selKey){
-  
-  setVQuotes(VQuotes.filter(quote => quote._id !== selKey ))
-
+    setVQuotes(VQuotes.filter(quote => quote._id !== selKey ))
  }
 
     
