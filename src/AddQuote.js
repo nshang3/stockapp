@@ -12,13 +12,13 @@ function AddQuote({onClose}){
 
   const [save, setSave] = useState(false)
 
-  const options = useMemo(() => ({
-    method: 'GET',
-    headers: {
-    'X-RapidAPI-Key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
-    'X-RapidAPI-Host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-    }
-  }), [])
+  // const options = useMemo(() => ({
+  //   method: 'GET',
+	//   headers: {
+	// 	'x-rapidapi-key': 'dd16385198msh05d12eea1e24340p19d96cjsn508075aa4433',
+	// 	'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+	//   }
+  // }), [])
 
   const [dojoURL, setDojoURL] = useState(null)
   const inputRef = useRef()
@@ -26,9 +26,10 @@ function AddQuote({onClose}){
 
   const fetchQuotes = async () => {
     try {
-      const response = await fetch(dojoURL, options)
+      const response = await fetch(dojoURL)
+      //const response = await fetch(dojoURL, options)
       const quotes = await response.json()
-      //console.log(quotes.quoteResponse.result[0].regularMarketPrice)
+      console.log(quotes)
 
       setQuote(prev => ({
         ...prev,
@@ -46,11 +47,10 @@ function AddQuote({onClose}){
   const post = async () => {
     
     const quo = {...quote}
-  
 
     try{
       let response;
-
+      //console.log(quo)
       response = await fetch("http://localhost:5050/quotes", {
         method: "POST",
         headers: {
@@ -72,11 +72,11 @@ function AddQuote({onClose}){
   useEffect( () =>{
       
       if (quote.symbol != "" ){
-      post()
+        post()
 
-      if (save){
-        onClose()
-      }
+        if (save){
+          onClose()
+        }
 
       }
   }, [quote])
@@ -90,7 +90,8 @@ function AddQuote({onClose}){
 
   const handleClick = () =>{
     setSave(true)
-    setDojoURL(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=`+ inputRef.current.value)
+    //setDojoURL(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=`+ inputRef.current.value)
+    setDojoURL(`http://localhost:5050/api/quotes/${inputRef.current.value}`)
   }
 
 
