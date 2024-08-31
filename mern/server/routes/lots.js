@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import db from "../db/connection.js";
 import { ObjectId } from "mongodb";
 
@@ -38,3 +38,44 @@ router.post("/", async (req, res) => {
         res.status(500).send("Error adding record");
     }
 })
+
+
+router.patch("/:id", async (req, res) => {
+    try {
+        const query = {_id: new ObjectId(req.params.id)};
+        const updates = {
+            $set: {
+                transType: req.body.transType,
+                date: req.body.date,
+                shares: parseInt(req.body.shares),
+                cost: parseFloat(req.body.cost),
+                comm: parseFloat(req.body.comm),
+                bank: req.body.bank,
+                notes: req.body.notes
+            }
+        }
+
+        let collection = await db.collection("lots");
+        let result = await collection.updateOne(query, updates);
+        res.send(result).status(200)
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating record");
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    try {
+        const query = {_id: new ObjectId(req.params.id)};
+
+        const collection = db.collection("lots");
+        let result = await collection.deleteOne(query)
+
+        res.send(result).status(200)
+    } catch (err){
+        console.error(err);
+        res.status(500).send("Error deleting record");
+    }
+})
+
+export default router;

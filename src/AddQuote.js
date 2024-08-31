@@ -1,5 +1,5 @@
 import './AddQuote.css';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef} from 'react';
 
 
 function AddQuote({onClose}){
@@ -47,7 +47,7 @@ function AddQuote({onClose}){
   const post = async () => {
     
     const quo = {...quote}
-
+    
     try{
       let response;
       //console.log(quo)
