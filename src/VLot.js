@@ -1,18 +1,18 @@
 import './VLot.css'
 
-function VLot() {
+function VLot({trans, date, shrs, cos, comm, ban, note}) {
 
     return(
         <section className="lot">
-            <div className="lotCol">Buy</div>
-            <div className="lotCol">2024-06-29</div>
-            <div className="lotCol">1688</div>
-            <div className="lotCol">114.83</div>
-            <div className="lotCol">9.95</div>
+            <div className="lotCol">{trans}</div>
+            <div className="lotCol">{date}</div>
+            <div className="lotCol">{shrs}</div>
+            <div className="lotCol">{cos}</div>
+            <div className="lotCol">{comm}</div>
             <div className="lotCol">27,875.10</div>
             <div className="lotCol">3,993.31</div>
-            <div className="lotCol">rRBCs</div>
-            <div className="lotCol">Put notes here</div>
+            <div className="lotCol">{ban}</div>
+            <div className="lotCol">{note}</div>
             <button className="lotCol" id="lotBtn">
             <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                 <polyline points="3 6 5 6 21 6"></polyline>

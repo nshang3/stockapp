@@ -30,7 +30,8 @@ function AddLot( {close} ){
                 },
                 body: JSON.stringify(lot)
             })
-
+            
+            close()
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
@@ -41,22 +42,23 @@ function AddLot( {close} ){
     }   
     
     useEffect ( () => {
-        if(formData.transAct != ""){
+        if(formData.transType != ""){
             postLot()
         }
     },[formData])
 
     const submitForm = (event) => {
         event.preventDefault();
-        console.log(inputRefs.current[0].value)
-        console.log(inputRefs.current[1].value)
+
         setFormData( prevData => Object.keys(prevData).reduce( (acc, key, index) => {
             acc[key] = inputRefs.current[index].value;
             return acc;    
         }, {}))
     }
-    //.map(callBackFn, thisArg) -> where callBackFn can have 3 parameters (currentValue, index, array) you are using (currentValue, index)
-    return (
+    //use reduce to create a new object that has the same keys, a rule to create new objects instead of overriding pre-existing ones in react
+    //you can use reduce since the accumulator acc is the value that is returned with reduce(callbackFn, initialValue) in this case initialValue = {}
+    //{} is an object and acc will take an intialValue if specified- in this case an object.
+        return (
             <div className="addCont">
             <form onSubmit={submitForm}>
                 <div className="formCont">

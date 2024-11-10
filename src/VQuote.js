@@ -22,6 +22,7 @@ import VLot from './VLot.js';
 
   function LotsView(){
     const [addT, setAddT] = useState(false)
+    const [VLots, setVLots] = useState([])
 
       function closeT(){
         setAddT(false)
@@ -31,6 +32,27 @@ import VLot from './VLot.js';
         setAddT(true)
       }
     
+
+    useEffect ( ()=> {
+      console.log("useEffect for fetching lots called ")
+      async function getLots(){
+        await new Promise(resolve => setTimeout(resolve, 100));
+        const response = await fetch(`http://localhost:5050/lots`, { cache: "no-store" })
+        
+        if (!response.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          console.log(message);
+          return;
+        }
+
+        const lots = await response.json()
+        setVLots(lots)
+        
+      }
+      getLots()
+      return;
+    },[addT, VLots.length])
+
     return(
       <div className="Quote" id="lot">
 
@@ -45,9 +67,19 @@ import VLot from './VLot.js';
             <Header />
           </div>
 
-          <VLot />
-          <VLot />
-          <VLot />
+          {VLots.map(lot => 
+            <VLot 
+              key={lot._id} 
+              trans={lot.transType} 
+              date={lot.date} 
+              shrs={parseInt(lot.shares)} 
+              cos={parseFloat(lot.cost)} 
+              comm={parseFloat(lot.comm)} 
+              ban={lot.bank}
+              note={lot.notes} 
+            /> 
+          )}
+
         </div>
 
       </div>

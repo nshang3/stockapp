@@ -29,7 +29,7 @@ function AddQuote({onClose}){
       const response = await fetch(dojoURL)
       //const response = await fetch(dojoURL, options)
       const quotes = await response.json()
-      console.log(quotes)
+      //console.log(quotes)
 
       setQuote(prev => ({
         ...prev,
