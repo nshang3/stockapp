@@ -27,6 +27,7 @@ function AddQuote({onClose}){
   const fetchQuotes = async () => {
     try {
       const response = await fetch(dojoURL)
+      
       //const response = await fetch(dojoURL, options)
       const quotes = await response.json()
       //console.log(quotes)
